@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="mk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        display: flex;
+        width: 300px;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      table th,
+      tr,
+      td {
+        border: 1px solid black;
+      }
+      button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Форма за внесување оцени</h1>
+    <div><label for="name">Име: </label><input id="name" type="text" /></div>
+    <div>
+      <label for="surname">Презимe: </label><input id="surname" type="text" />
+    </div>
+    <div>
+      <label for="index">Индекс: </label><input id="index" type="text" />
+    </div>
+    <div>
+      <label for="class">Предмет: </label><input id="class" type="text" />
+    </div>
+    <div>
+      <label for="grade">Оцена: </label
+      ><select name="" id="grade">
+        <option value="5">5 (пет)</option>
+        <option value="6">6 (шест)</option>
+        <option value="7">7 (седум)</option>
+        <option value="8">8 (осум)</option>
+        <option value="9">9 (девет)</option>
+        <option value="10">10 (десет)</option>
+      </select>
+    </div>
+    <button id="add">Внеси</button>
+
+    <table id="content">
+      <tr>
+        <th>Име</th>
+        <th>Презиме</th>
+        <th>Индекс</th>
+        <th>Предмет</th>
+        <th>Оцена</th>
+      </tr>
+    </table>
+    <script>
+      var data = [];
+      const update = () => {
+        let name = document.getElementById("name").value;
+        let surname = document.getElementById("surname").value;
+        let index = document.getElementById("index").value;
+        let clas = document.getElementById("class").value;
+        let grade = document.getElementById("grade").value;
+        let table = document.getElementById("content");
+        if (name && surname && index && clas && grade) {
+          table.innerHTML +=
+            "<tr><td>" +
+            name +
+            "</td><td>" +
+            surname +
+            "</td><td>" +
+            index +
+            "</td><td>" +
+            clas +
+            "</td><td>" +
+            grade +
+            "</td></tr>";
+          data.push({
+            name: name,
+            surname: surname,
+            index: index,
+            class: clas,
+            grade: grade,
+          });
+          document.getElementById("name").value = "";
+          document.getElementById("surname").value = "";
+          document.getElementById("index").value = "";
+          document.getElementById("class").value = "";
+        } else {
+          alert("Please enter all the fields!");
+        }
+      };
+      document.getElementById("add").addEventListener("click", update);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LongestWord</title>
+</head>
+<body>
+</body>
+<script>
+    let words=""
+    for (let i = 0; i < 3; i++) {
+        let line=prompt("Enter a sentence!")
+        words=words.concat(line).concat(" ")
+    }
+    let longestWord=words.split(" ").sort((a,b)=>a.length-b.length).reverse()
+    alert(longestWord[0])
+</script>
+</html>

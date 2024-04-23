@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarsInsurance</title>
+</head>
+<body>
+
+<div><label for="name">Name - </label><input type="text" id="name"></div>
+<div><label for="plate">Register Plate - </label><input id="plate" type="text"></div>
+<div><label for="years">Years - </label><input type="number" id="years"></div>
+<div>
+    <label for="yes">Yes</label><input id="yes" type="radio" name="acc" value="y">
+    <label for="no">No</label><input id="no" type="radio" name="acc" value="n">
+    <span id="msg">TOTAL INSURANCES : <span id="cnt"></span></span>
+</div>
+
+<button id="generate" onclick="generate_car()">Generate</button>
+<div id="content">
+    <div class="row" id="first"></div>
+</div>
+
+</body>
+<script>
+    let counter=0
+    function generate_car() {
+
+        let name=document.getElementById("name").value
+        let plate=document.getElementById("plate").value
+        let years=document.getElementById("years").value
+        let accident=(document.getElementById("yes").checked)? 'y' : (document.getElementById("no").checked)? 'n':0
+
+        if(name && plate && years && accident){
+            if(isValid(plate)){
+                let price=3000
+                if(plateNumber(plate)%1111===0){
+                    price+=1000
+                }
+                if(accident==='y'){
+                    price+=500
+                }
+
+                if(years>30){
+                    document.getElementById("first").innerHTML+="<div class='red'><div class='items'><p>"+name+"</p><p>"+plate+"</p><p>"+years+"</p><p>"+price+"</p></div><div><button onclick='pay(this)'>Pay</button><button onclick='del(this)'>Delete</button></div></div>"
+                }else {
+                    document.getElementById("first").innerHTML+="<div class='green'><div class='items'><p>"+name+"</p><p>"+plate+"</p><p>"+years+"</p><p>"+price+"</p></div><div><button onclick='pay(this)'>Pay</button><button onclick='del(this)'>Delete</button></div></div>"
+                }
+                document.getElementById("cnt").innerHTML=counter+=1
+
+            }else {
+                alert("Invalid plate insert like this AA-1111-AA !")
+            }
+        }else{
+            alert("Please enter all the fields!")
+        }
+
+    }
+    function isAlpha(ch){
+        return typeof ch === "string" && ch.length === 1 && /[A-Za-z]/.test(ch);
+    }
+    function isValid(plate){
+        let parts=plate.split("-")//AA-1234-AA ["AA","1234","AA" ]
+        if((isAlpha(parts[0][0])&&isAlpha(parts[0][1])) && !isNaN(parseInt(parts[1])) && (isAlpha(parts[2][0])&&isAlpha(parts[2][1]))){
+            return true
+        }else{
+            return false
+        }
+    }
+    function plateNumber(plate){
+        return parseInt(plate.split("-")[1])
+    }
+    function pay(btn){
+       let btn2=btn.parentNode.lastChild
+        btn.parentNode.removeChild(btn2)
+        btn.parentNode.removeChild(btn)
+    }
+    function del(btn){
+        let div=btn.parentNode.parentNode
+        div.parentNode.removeChild(div)
+        document.getElementById("cnt").innerHTML=counter-=1
+
+    }
+</script>
+<style>
+    .red{
+        background-color: red;
+        width: 200px;
+        height: 300px;
+        margin: 10px;
+        display: inline-block;
+    }
+    .green{
+        background-color: green;
+        width: 200px;
+        height: 300px;
+        margin: 10px;
+        display: inline-block;
+    }
+
+    .items{
+        display: flex;
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #msg{
+        position: relative;
+        margin-left: 280px;
+    }
+
+</style>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MobileNumber</title>
+</head>
+<body>
+</body>
+<script>
+    let number = prompt("Type a mobile number!");
+    if(!isNaN(parseInt(number)) && number.length===8){
+       number=number.split('')
+        let operator
+        if(number[1]==1 || number[1]==0 || number[1]==2){
+            operator="T-mobile"
+        }else if(number[1]==5 || number[1]==6){
+            operator="One"
+        }else {
+            operator="Vip"
+        }
+        alert(`0${number[0]}${number[1]}/${number[2]}${number[3]}${number[4]}-${number[5]}${number[6]}${number[7]}-${operator}`)
+    }else{
+        alert("Not a valid mobile number!")
+    }
+</script>
+</html>

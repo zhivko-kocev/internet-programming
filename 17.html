@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let arr = [];
+    let n = prompt("How many books are you entering?");
+    for (let i = 0; i < n; i++) {
+      let title = prompt("Enter the title");
+      let author = prompt("Enter the author");
+      let already_read = prompt("Have you read this book (y/n)");
+      arr.push({
+        title: title,
+        author: author,
+        already_read: already_read,
+      });
+    }
+
+    arr.forEach((book) => {
+      book.already_read == "y"
+        ? console.log(
+            "You already read " + book.title + " by " + book.author + ""
+          )
+        : console.log(
+            "You still need to read " + book.title + " by " + book.author + ""
+          );
+    });
+  </script>
+</html>

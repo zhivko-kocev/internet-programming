@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <input type="number" name="" id="red" />
+    <br />
+    <input type="number" name="" id="green" />
+    <br />
+    <input type="number" name="" id="blue" />
+    <br />
+    Start <input type="radio" name="where" id="start" /> End
+    <input type="radio" name="where" id="end" />
+    <br />
+    <input type="text" id="txt" />
+    <br />
+    <button id="add">Add</button>
+    <button id="del">Delete</button>
+    <div id="content"></div>
+    <script>
+      var data = [];
+      document.getElementById("add").addEventListener("click", () => {
+        let red = document.getElementById("red").value;
+        let green = document.getElementById("green").value;
+        let blue = document.getElementById("blue").value;
+
+        let where = document.querySelector('input[name="where"]:checked').id;
+
+        let text = document.getElementById("txt").value;
+
+        let p = document.createElement("p");
+
+        p.style.color = "rgb(" + red + "," + green + "," + blue + ")";
+
+        p.innerHTML = text;
+
+        if (where == "start") {
+          data.unshift(p);
+        } else {
+          data.push(p);
+        }
+
+        updateContent(data);
+      });
+
+      document.getElementById("del").addEventListener("click", () => {
+        let where = document.querySelector('input[name="where"]:checked').id;
+
+        if (where == "start") {
+          data.shift();
+        } else {
+          data.pop();
+        }
+        updateContent(data);
+      });
+
+      function updateContent(data) {
+        console.log(data);
+        document.getElementById("content").innerHTML = "";
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          document.getElementById("content").append(element);
+        }
+      }
+    </script>
+  </body>
+</html>

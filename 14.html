@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let n = prompt("How many elements are you adding?");
+
+    let array = [];
+
+    for (let i = 0; i < n; i++) {
+      let number = prompt("Enter number:");
+      array.push(number);
+    }
+
+    console.log(remove_duplicates(array));
+
+    function remove_duplicates(array) {
+      let unique = [];
+      array.forEach((element) => {
+        !unique.includes(element)
+          ? unique.push(element)
+          : console.log("Found dupicate!");
+      });
+      return unique;
+    }
+  </script>
+</html>

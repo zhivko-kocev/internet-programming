@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Details</h1>
+<div><p>Name</p><input id="name" type="text"></div>
+<div><p>Index</p><input id="index" type="text"></div>
+<div><p>Phone</p><input id="phone" type="text"></div>
+<div>
+    <p>Grade</p>
+    <input type="radio" name="grade" value="5" checked><label>5</label>
+    <input type="radio" name="grade" value=6><label>6</label>
+    <input type="radio" name="grade" value="7"><label>7</label>
+    <input type="radio" name="grade" value="8"><label>8</label>
+    <input type="radio" name="grade" value="9"><label>9</label>
+    <input type="radio" name="grade" value="10"><label>10</label>
+
+</div>
+<div id="inline">
+    <p>Revery history</p>
+    <ul id="revert">
+
+    </ul>
+</div>
+<div>
+    <p>Session</p>
+    <select id="session">
+        <option>January</option>
+        <option>June</option>
+        <option>September</option>
+    </select>
+</div>
+<button id="import_btn" onclick="import_student()">Import Student</button>
+<h2>Students (average grade:<span id="average">0</span>)</h2>
+<div>
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Index</th>
+            <th>Phone</th>
+            <th>Grade</th>
+            <th>Session</th>
+            <th>Actions</th>
+        </tr>
+
+    </table>
+</div>
+</body>
+<style>
+    p {
+        display: inline-block;
+    }
+
+    table,td, tr, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    #inline{
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        left: 500px;
+    }
+</style>
+<script>
+    var sum=0
+    var students=0
+    function import_student() {
+        let name = document.getElementById('name').value
+        let index = document.getElementById('index').value
+        let phone = document.getElementById('phone').value
+        phone=phone.replace(/(\d{3})(\d{3})(\d{3})$/,"$1/$2-$3")
+        let grade = document.querySelector('input[name="grade"]:checked').value
+        let session = document.getElementById('session').value
+        if (name && index && phone && grade && session){
+            document.getElementById("table").innerHTML+="<tr><td>"+name+"</td><td>"+index+"</td><td>"+phone+"</td><td>"+grade+"</td><td>"+session+"</td><td><button onclick='confirm_student(this)'>Confirm</button><button onclick='revert(this)'>Revert</button></td></tr>"
+            students++
+            sum+=parseInt(grade)
+        }else {
+            alert("Fill all the boxes!")
+        }
+        document.getElementById('average').innerHTML=(sum/students).toFixed(2)
+    }
+    function confirm_student(btn){
+        btn.parentNode.parentNode.style.backgroundColor='lightgreen'
+        btn.parentNode.lastChild.disabled=true
+        btn.disabled=true
+
+    }
+    function revert(btn){
+        let index=btn.parentNode.parentNode.children[1].innerHTML
+        let grade=btn.parentNode.parentNode.children[3].innerHTML
+        sum-=grade
+        students--
+        document.getElementById('average').innerHTML=(sum/students).toFixed(2)
+        document.getElementById('revert').innerHTML+="<li>"+index+" - grade "+grade+"</li>"
+        btn.parentNode.parentNode.remove()
+    }
+</script>
+</html>

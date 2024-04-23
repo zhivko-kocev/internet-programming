@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMICalculator</title>
+</head>
+<body>
+<p>Enter weight : </p>
+<label>
+  <input id="weight">
+</label>
+<br>
+<br>
+<p>Enter height : </p>
+<label>
+  <input id="height">
+</label>
+<button onclick="calc()">Calculate</button>
+
+</body>
+<style>
+  label{
+    display: inline;
+    padding-left: 10px;
+  }
+  p{
+    display: inline;
+  }
+  button{
+    display: block;
+    margin-top: 20px;
+    margin-left: 5px;
+  }
+</style>
+<script>
+  function calc(){
+    let weight=document.getElementById("weight").value
+    let height=document.getElementById("height").value/100
+    alert(`BMI is equal to ${(weight/(height*height)).toFixed(2)}`)
+  }
+</script>
+</html>

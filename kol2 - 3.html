@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <button id="left"><</button>
+    <button id="right">></button>
+    <div id="shape"></div>
+    <script>
+      var cnt = 0;
+      var string =
+        '[{"background-color":"red", "width":"100px", "height":"100px"}, {"background-color":"green", "width":"50px", "height":"100px"}, {"background-color":"blue", "width":"100px", "height":"50px"}]';
+      var data = JSON.parse(string);
+      var obj = document.getElementById("shape");
+      obj.style.left = "0vw";
+      fillObj(obj);
+
+      function right(obj) {
+        var moveRight = setInterval(() => {
+          obj.style.left = parseInt(obj.style.left.split("vw")[0]) + 1 + "vw";
+          if (obj.style.left.split("vw")[0] > 100) {
+            clearInterval(moveRight);
+
+            fillObj(obj);
+            obj.style.left = "-9vw";
+            appearFromLeft(obj);
+          }
+        }, 20);
+      }
+
+      function left(obj) {
+        var moveLeft = setInterval(() => {
+          obj.style.left = parseInt(obj.style.left.split("vw")[0]) - 1 + "vw";
+          if (obj.style.left.split("vw")[0] < -14) {
+            clearInterval(moveLeft);
+
+            obj.style.left = "101vw";
+            fillObj(obj);
+            appearFromRight(obj);
+          }
+        }, 20);
+      }
+
+      function fillObj(obj) {
+        let index = Math.floor(Math.random() * 3);
+        obj.style.background = data[index]["background-color"];
+        obj.style.width = data[index]["width"];
+        obj.style.height = data[index]["height"];
+        obj.style.position = "relative";
+      }
+      function appearFromLeft(obj) {
+        let fromLeft = setInterval(() => {
+          obj.style.left = parseInt(obj.style.left.split("vw")[0]) + 1 + "vw";
+          if (obj.style.left.split("vw")[0] == 0) {
+            clearInterval(fromLeft);
+          }
+        }, 20);
+      }
+      function appearFromRight(obj) {
+        let fromRight = setInterval(() => {
+          obj.style.left = parseInt(obj.style.left.split("vw")[0]) - 1 + "vw";
+          if (obj.style.left.split("vw")[0] == 0) {
+            clearInterval(fromRight);
+          }
+        }, 20);
+      }
+      document.getElementById("right").addEventListener("click", () => {
+        right(obj);
+      });
+      document.getElementById("left").addEventListener("click", () => {
+        left(obj);
+      });
+    </script>
+  </body>
+</html>

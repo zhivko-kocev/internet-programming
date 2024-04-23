@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .snowflake {
+        position: absolute;
+        background: black;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        createSnowflakes();
+      });
+
+      function createSnowflakes() {
+        const numberOfSnowflakes = 50;
+        const container = document.body;
+
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+          const snowflake = document.createElement("div");
+          snowflake.className = "snowflake";
+          container.appendChild(snowflake);
+
+          const startPosition = Math.random() * window.innerWidth;
+          const animationDuration = Math.random() * 2 + 2; // Between 2 and 4 seconds
+
+          snowflake.style.left = startPosition + "px";
+          snowflake.style.animationDuration = animationDuration + "s";
+        }
+      }
+    </script>
+    <title>Snowflakes in JavaScript</title>
+  </head>
+  <body></body>
+</html>

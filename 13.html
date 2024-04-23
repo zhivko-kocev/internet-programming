@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <input type="text" id="first_normal" /><input
+      type="text"
+      id="first_complex"
+    /><span>i</span>
+    <br />
+    <input type="text" id="second_normal" /><input
+      type="text"
+      id="second_complex"
+    /><span>i</span>
+    <br />
+    <button onclick="execute()">Add</button>
+    <input type="text" id="result_normal" /><input
+      type="text"
+      id="result_complex"
+    /><span>i</span>
+    <script>
+      function execute() {
+        let first_norm = parseInt(
+          document.getElementById("first_normal").value
+        );
+        let second_norm = parseInt(
+          document.getElementById("second_normal").value
+        );
+        let first_comp = parseInt(
+          document.getElementById("first_complex").value
+        );
+        let second_com = parseInt(
+          document.getElementById("second_complex").value
+        );
+
+        document.getElementById("result_normal").value =
+          first_norm + second_norm;
+        document.getElementById("result_complex").value =
+          first_comp + second_com;
+      }
+    </script>
+  </body>
+  <style>
+    input {
+      margin-top: 10px;
+      margin-right: 5px;
+      width: 50px;
+    }
+    button {
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</html>

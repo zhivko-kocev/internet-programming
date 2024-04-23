@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let n = prompt("How many elements are you adding?");
+
+    let array = [];
+
+    for (let i = 0; i < n; i++) {
+      let number = prompt("Enter number:");
+      array.push(number);
+    }
+
+    let number = prompt("Enter the number to delete");
+
+    console.log(remove_array_element(array, number));
+
+    function remove_array_element(array, number) {
+      return array.filter((element) => element != number);
+    }
+  </script>
+</html>

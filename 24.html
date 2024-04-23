@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style></style>
+  <body>
+    <div id="content"></div>
+    <button id="right">></button>
+  </body>
+  <script>
+    var index = 0;
+    var data = [
+      {
+        Question: "1",
+        answers: ["r1", "r2", "r3", "r3"],
+      },
+      {
+        Question: "2",
+        answers: ["r1", "r3", "r3"],
+      },
+      {
+        Question: "3",
+        answers: ["r1"],
+      },
+    ];
+    loadData(index++);
+
+    document.getElementById("right").addEventListener("click", () => {
+      loadData(index++);
+    });
+    document.querySelector("input[name=answer]:checked");
+
+    function loadData(index) {
+      document.getElementById("content").innerHTML = "";
+      document.getElementById("content").innerHTML += data[index]["Question"];
+      for (let i = 0; i < data[index]["answers"].length; i++) {
+        let radio = document.createElement("input");
+        let div = document.createElement("div");
+        radio.type = "radio";
+        radio.name = "answer";
+        div.append(radio);
+        div.append(data[index]["answers"][i]);
+        document.getElementById("content").append(div);
+      }
+    }
+  </script>
+</html>

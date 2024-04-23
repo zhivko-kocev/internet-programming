@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script></script>
+    <style>
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Meморија</h1>
+    <div style="text-align: left; float: left">
+      <table style="border: 1">
+        <tr>
+          <td id="11"><img id="0" src="" onclick="flipImage(this)" /></td>
+          <td id="12"><img id="1" src="" onclick="flipImage(this)" /></td>
+          <td id="13"><img id="2" src="" onclick="flipImage(this)" /></td>
+          <td id="14"><img id="3" src="" onclick="flipImage(this)" /></td>
+        </tr>
+        <tr>
+          <td id="21"><img id="4" src="" onclick="flipImage(this)" /></td>
+          <td id="22"><img id="5" src="" onclick="flipImage(this)" /></td>
+          <td id="23"><img id="6" src="" onclick="flipImage(this)" /></td>
+          <td id="24"><img id="7" src="" onclick="flipImage(this)" /></td>
+        </tr>
+        <tr>
+          <td id="31"><img id="8" src="" onclick="flipImage(this)" /></td>
+          <td id="32"><img id="9" src="" onclick="flipImage(this)" /></td>
+          <td id="33"><img id="10" src="" onclick="flipImage(this)" /></td>
+          <td id="34"><img id="11" src="" onclick="flipImage(this)" /></td>
+        </tr>
+        <tr>
+          <td id="41"><img id="12" src="" onclick="flipImage(this)" /></td>
+          <td id="42"><img id="13" src="" onclick="flipImage(this)" /></td>
+          <td id="43"><img id="14" src="" onclick="flipImage(this)" /></td>
+          <td id="44"><img id="15" src="" onclick="flipImage(this)" /></td>
+        </tr>
+      </table>
+      <input type="submit" value="RESET" onclick="resetGame()" />
+    </div>
+    <br />
+    <script>
+      var arr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+      var first_flipped, second_flipped;
+      var flips = 0;
+      var guessed = 0;
+      Array.from(document.getElementsByTagName("img")).forEach(
+        (image, index) => {
+          image.src = "assets/background.jpg";
+        }
+      );
+
+      function shuffle(array) {
+        let currentIndex = array.length,
+          randomIndex;
+        while (currentIndex > 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
+        }
+
+        return array;
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        arr = shuffle(arr);
+        console.log(arr);
+      });
+
+      function resetGame() {
+        location.reload();
+      }
+
+      function flipImage(element) {
+        if (first_flipped == element || second_flipped == element) {
+          console.log("Same");
+          return;
+        }
+        if (flips == 0) {
+          first_flipped = element;
+          element.src = `assets/${arr[element.id]}.jpg`;
+          flips++;
+        } else if (flips == 1) {
+          second_flipped = element;
+          element.src = `assets/${arr[element.id]}.jpg`;
+          flips++;
+          if (first_flipped.src == second_flipped.src) {
+            first_flipped.style.pointerEvents = "none";
+            second_flipped.style.pointerEvents = "none";
+            guessed++;
+            flips = 0;
+          }
+          if (guessed == 8) {
+            alert("You won if u want a new game click RESET!");
+          }
+        } else {
+          first_flipped.src = "assets/background.jpg";
+          first_flipped = second_flipped;
+          second_flipped = element;
+          element.src = `assets/${arr[element.id]}.jpg`;
+          flips++;
+          if (first_flipped.src == second_flipped.src) {
+            first_flipped.style.pointerEvents = "none";
+            second_flipped.style.pointerEvents = "none";
+            guessed++;
+            flips = 0;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

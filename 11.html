@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="content"></div>
+    <button id="random" onclick="getRand()">Change</button>
+
+    <script>
+      var data = [
+        {
+          id: "1",
+          url: "https://designmodo.com/wp-content/uploads/2014/07/free-photos.jpg",
+        },
+        {
+          id: "2",
+          url: "https://farm5.staticflickr.com/4060/4567292488_5d3f4b05f6_z.jpg",
+        },
+        {
+          id: "3",
+          url: "https://wallup.net/wp-content/uploads/2017/03/28/401266-landscape-road-forest-748x421.jpg",
+        },
+      ];
+      var num;
+      var first = true;
+      function getRand() {
+        let rand = Math.floor(Math.random() * 3);
+        while (num == rand) {
+          rand = Math.floor(Math.random() * 3);
+        }
+        if (first) {
+          num = rand;
+          first = false;
+        } else {
+          num = rand;
+        }
+        console.log(rand);
+        document.getElementById("content").innerHTML =
+          "<img src=" + data[rand].url + ">";
+      }
+    </script>
+  </body>
+</html>

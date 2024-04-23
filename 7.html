@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Classes</title>
+</head>
+<body>
+<h1>Online classes</h1>
+<div class="item">
+  <span>Name and surname:</span>
+  <input class="text_space" type="text" id="name">
+</div>
+<div class="item">
+  <span>Email:</span>
+  <input class="text_space" type="text" id="email">
+</div>
+<div class="item">
+  <span>Age:</span>
+  <input class="text_space" type="number" id="age">
+</div>
+<div class="item">
+  <span>Username:</span>
+  <input class="text_space" type="text" id="username">
+</div>
+<div class="item">
+  <span>Password:</span>
+  <input class="text_space" type="password" id="password">
+</div>
+<div class="item">
+  <span>Role:</span>
+  <select class="text_space" id="type">
+    <option>Teacher</option>
+    <option>Student</option>
+  </select>
+</div>
+<div><button id="add_btn" onclick="addPerson()">ADD</button></div>
+<div id="content">
+  <p id="avaiable_text">Avaiable teachers:<span id="count">0</span></p>
+  <h1>Users</h1>
+  <table id="users_table">
+    <th>Name</th><th>Username</th><th>Email</th><th>Age</th><th>Role</th><th>Actions</th>
+  </table>
+</div>
+</body>
+<style>
+  body{
+    display: flex;
+    flex-direction: column;
+  }
+  .item{
+    display: flex;
+    margin-bottom: 10px;
+  }
+  span{
+    display: inline-block;
+    width: 150px;
+  }
+  #add_btn{
+    display: inline-block;
+
+  }
+  table,th,td,tr{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+  .green{
+    background-color: green;
+  }
+  .blue{
+    background-color: blue;
+  }
+  .grey{
+    background-color: grey;
+  }
+</style>
+<script>
+  var cnt=0
+  function addPerson(){
+    let name=document.getElementById("name").value
+    let email=document.getElementById("email").value
+    let age = document.getElementById("age").value
+    let username=document.getElementById("username").value
+    let password=document.getElementById("password").value
+    let type=document.getElementById("type").value
+    if(password.length>=10){
+      if(type==="Teacher"){
+        if(age<19){
+          alert("Too young!")
+        }else{
+          document.getElementById('users_table').innerHTML+= "<tr class='green'><td>"+name+"</td><td>"+username+"</td><td>"+email+"</td><td>"+age+"</td><td>"+type+"</td><td><button class='hire_btn' onclick='hireTeacher(this)'>Hire</button></td></tr>"
+          cnt++
+          document.getElementById('count').innerHTML=cnt
+        }
+      }else {
+        document.getElementById('users_table').innerHTML+="<tr class='blue'><td>"+name+"</td><td>"+username+"</td><td>"+email+"</td><td>"+age+"</td><td>"+type+"</td><td></td></tr>"
+
+      }
+    }else{
+      alert("Invalid password!")
+    }
+
+
+  }
+  function hireTeacher(btn) {
+    let tr = btn.parentNode.parentNode
+    tr.classList.remove('green')
+    tr.classList.add("grey")
+    btn.parentNode.removeChild(btn.parentNode.firstChild)
+    cnt--
+    document.getElementById('count').innerHTML=cnt
+  }
+</script>
+</html>

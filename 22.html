@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script></script>
+  </head>
+  <body>
+    <div>
+      <div style="text-align: right; float: left">
+        <label id="obid">Обиди 0</label>
+        <p>Погодок: <input id="guess" style="width: 150px" /></p>
+        <button id="try">Погоди</button>
+        <button id="reset">Од почеток</button>
+      </div>
+    </div>
+    <br />
+    <div id="prikaz" style="clear: both"></div>
+    <script>
+      var number;
+      var tries = 0;
+      const generate_random = () => {
+        number = Math.floor(Math.random() * 8999) + 1000;
+        console.log(number);
+      };
+
+      const correct_digits = (number1, number2) => {
+        number1 = String(number1).split("");
+        number2 = String(number2).split("");
+        return number1.filter((number) => number2.includes(number)).length;
+      };
+
+      const correct_places = (number1, number2) => {
+        number1 = String(number1);
+        number2 = String(number2);
+        return [...number1].filter(
+          (number, index) => number2.charAt(index) == number
+        ).length;
+      };
+
+      document.addEventListener("DOMContentLoaded", generate_random);
+
+      document.getElementById("try").addEventListener("click", function () {
+        const guess = document.getElementById("guess").value;
+        const digits = correct_digits(number, guess);
+        const places = correct_places(number, guess);
+        document.getElementById("obid").innerHTML = `Обиди ${++tries}`;
+        if (digits == places) {
+          document.getElementById("prikaz").innerHTML += `ПОГОДОК!!!`;
+          this.disabled = true;
+          return;
+        }
+        document.getElementById(
+          "prikaz"
+        ).innerHTML += `<p>Има ${digits},на место ${places} ${guess}`;
+      });
+
+      document.getElementById("reset").addEventListener("click", function () {
+        document.getElementById("guess").value = "";
+        document.getElementById("obid").innerHTML = "Обиди 0";
+        document.getElementById("prikaz").innerHTML = "";
+        generate_random();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        margin: 10px 10px;
+      }
+      #content {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label for="items">Items: </label><input type="text" id="items" />
+    </div>
+
+    <div>
+      <label for="type">Type: </label
+      ><select id="type">
+        <option value="radio">Radio Button</option>
+        <option value="checkbox">Check Box</option>
+      </select>
+    </div>
+
+    <div>
+      <button id="show">Show</button>
+    </div>
+    <div id="content">Content</div>
+    <script>
+      const update = () => {
+        let data = document.getElementById("items").value.split(",");
+        let type = document.getElementById("type").value;
+        let content = document.getElementById("content");
+        content.innerHTML = "";
+        data.forEach((element) => {
+          let box = document.createElement("div");
+          box.innerHTML =
+            "<input type=" +
+            type +
+            " name='item' /><label>" +
+            element +
+            "</label>";
+          content.appendChild(box);
+          document.getElementById("items").value = "";
+        });
+      };
+      document.getElementById("show").addEventListener("click", update);
+    </script>
+  </body>
+</html>

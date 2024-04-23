@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="valid"></p>
+<input type="text" id="content">
+<button onclick="shiftLeft()"><</button ><button onclick="shiftRight()">></button><button onclick="validate()">validate</button>
+</body>
+<script>
+    function shiftLeft() {
+        let text=document.getElementById('content').value
+        text=text.split("-")
+        let part=text.shift()
+        text.push(part)
+        document.getElementById('content').value=text.join("-")
+    }
+    function shiftRight() {
+        let text=document.getElementById('content').value
+        text=text.split("-")
+        let part=text.pop()
+        text.unshift(part)
+        document.getElementById('content').value=text.join("-")
+    }
+    function validate(){
+        let text=document.getElementById('content').value
+        text=text.split("-")
+        if(text.every(element=>isValid(element))){
+            document.getElementById("valid").innerHTML="Valid Card"
+        }else{
+            document.getElementById("valid").innerHTML="Invalid Card"
+        }
+    }
+    function isValid(part){
+        for (let i = 0; i < part.length; i++) {
+            for (let j = i+1; j < part.length; j++) {
+                if(part[i]===part[j]){
+                    return false
+                }
+            }
+        }
+        return true
+    }
+</script>
+</html>

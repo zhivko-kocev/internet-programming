@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #main {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        align-items: center;
+      }
+      div {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Промена на позадина</h1>
+      <div>
+        <input type="radio" name="type" id="color" /><label for="color"
+          >Color</label
+        >
+        <input type="radio" name="type" id="image" /><label for="image"
+          >Image</label
+        >
+      </div>
+      <div>
+        <label for="value">Value:</label>
+        <input type="text" id="value" />
+      </div>
+      <div>
+        <button id="change">Промени</button>
+      </div>
+    </div>
+    <script>
+      const change = () => {
+        let type = document.querySelector("input[name=type]:checked").id;
+        let value = document.getElementById("value").value;
+        if (type == "color") {
+          document.getElementById("main").style.backgroundColor = value;
+          document.getElementById("main").style.backgroundImage = "";
+        } else {
+          document.getElementById("main").style.backgroundImage =
+            "url(" + value + ")";
+          document.getElementById("main").style.backgroundColor = none;
+        }
+      };
+      document.getElementById("change").addEventListener("click", change);
+    </script>
+  </body>
+</html>
